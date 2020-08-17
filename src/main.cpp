@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 			// 2. update screen
 
 			// clear screen
-			// glClear(GL_COLOR_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT);
 
 			// add new updates
 			// your updated stuff to render here (future todo)
@@ -131,6 +131,7 @@ int main(int argc, char *argv[])
 			SDL_GL_SwapWindow(sdl_window);
 		}
 	}
+
 	// clean up
 	SDL_DestroyWindow(sdl_window);
 	SDL_Quit();
