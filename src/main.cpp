@@ -67,30 +67,19 @@ int main(int argc, char *argv[])
 	SDL_Event sdl_event;
 	while (isRunning)
 	{
+		// 1. check events
 		while (SDL_PollEvent(&sdl_event) != 0)
 		{
-			// 1. check events
 			if (sdl_event.type == SDL_QUIT)
 			{
-				isRunning = 0;
+				isRunning = false;
 			}
-			// else if (sdl_event.type == SDL_WINDOWEVENT) //https://wiki.libsdl.org/SDL_WindowEvent
-			// {                                           //https://stackoverflow.com/questions/32294913/getting-contiunous-window-resize-event-in-sdl-2
-			// 	switch (sdl_event.window.event)            //		continuous resize apparently not possible because of a bug :(
-			// 	{
-			// 	case SDL_WINDOWEVENT_SIZE_CHANGED:
-			// 		win_width = sdl_event.window.data1;
-			// 		win_height = sdl_event.window.data2;
-			// 		glViewport(0, 0, win_width, win_height); // only need to redo if screen size changes
-			// 		break;
-			// 	}
-			// }
 			else if (sdl_event.type == SDL_KEYDOWN)
 			{
 				switch (sdl_event.key.keysym.sym)
 				{
 				case SDLK_ESCAPE:
-					isRunning = 0;
+					isRunning = false;
 					break;
 				case SDLK_F11:
 					if (curr_screen_size != SCREENSIZE::fullscreen) // then set it to fullscreen and save prev state
@@ -115,23 +104,25 @@ int main(int argc, char *argv[])
 					case SCREENSIZE::is640x480:
 						curr_screen_size = SCREENSIZE::is1366x768;
 						SDL_SetWindowSize(sdl_window, 1366, 768);
+						SDL_GetWindowSize(sdl_window, &win_width, &win_height);
+						glViewport(0, 0, win_width, win_height);
 						break;
 					case SCREENSIZE::is1366x768:
 						curr_screen_size = SCREENSIZE::is640x480;
 						SDL_SetWindowSize(sdl_window, 640, 480);
+						SDL_GetWindowSize(sdl_window, &win_width, &win_height);
+						glViewport(0, 0, win_width, win_height);
 						break;
 					}
-					SDL_GetWindowSize(sdl_window, &win_width, &win_height);
-					glViewport(0, 0, win_width, win_height);
+
 					break;
 				}
 			}
 
-
 			// 2. update screen
 
 			// clear screen
-			glClear(GL_COLOR_BUFFER_BIT);
+			// glClear(GL_COLOR_BUFFER_BIT);
 
 			// add new updates
 			// your updated stuff to render here (future todo)
