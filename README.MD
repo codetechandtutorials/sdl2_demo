@@ -1,3 +1,5 @@
 # sdl2_demo
 
-[yt tutorial](https://www.youtube.com/channel/UC4EJN2OSNdl-mSxGjitRvyA)
+An example of getting a window up a running for opengl context with SDL. 
+
+[YouTube Tutorial Video](https://youtu.be/JXdqh0INIBI)
